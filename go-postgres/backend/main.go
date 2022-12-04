@@ -2,12 +2,29 @@ package main
 
 import (
 	"encoding/json"
+	"io"
 	"net/http"
 	"strings"
 
 	"github.com/supertokens/supertokens-golang/recipe/session"
 	"github.com/supertokens/supertokens-golang/supertokens"
 )
+
+func create(w http.ResponseWriter, r *http.Request) {
+	io.WriteString(w, "Create Success\n")
+}
+
+func read(w http.ResponseWriter, r *http.Request) {
+	io.WriteString(w, "Read Success\n")
+}
+
+func update(w http.ResponseWriter, r *http.Request) {
+	io.WriteString(w, "Update Success\n")
+}
+
+func delete(w http.ResponseWriter, r *http.Request) {
+	io.WriteString(w, "Delete Success\n")
+}
 
 func main() {
 	err := supertokens.Init(SuperTokensConfig)
@@ -18,7 +35,22 @@ func main() {
 
 	http.ListenAndServe(":3001", corsMiddleware(
 		supertokens.Middleware(http.HandlerFunc(func(rw http.ResponseWriter, r *http.Request) {
-			// Handle your APIs..
+
+			if r.URL.Path == "/create" {
+				session.VerifySession(nil, create).ServeHTTP(rw, r)
+			}
+
+			if r.URL.Path == "/read" {
+				session.VerifySession(nil, read).ServeHTTP(rw, r)
+			}
+
+			if r.URL.Path == "/update" {
+				session.VerifySession(nil, update).ServeHTTP(rw, r)
+			}
+
+			if r.URL.Path == "/delete" {
+				session.VerifySession(nil, delete).ServeHTTP(rw, r)
+			}
 
 			if r.URL.Path == "/sessioninfo" {
 				session.VerifySession(nil, sessioninfo).ServeHTTP(rw, r)

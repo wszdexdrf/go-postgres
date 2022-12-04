@@ -10,7 +10,8 @@ import (
 
 var SuperTokensConfig = supertokens.TypeInput{
 	Supertokens: &supertokens.ConnectionInfo{
-		ConnectionURI: "https://try.supertokens.com",
+		ConnectionURI: "http://localhost:3567",
+		APIKey:        "someKey",
 	},
 	AppInfo: supertokens.AppInfo{
 		AppName:       "SuperTokens Demo App",
