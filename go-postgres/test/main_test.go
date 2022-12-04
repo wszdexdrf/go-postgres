@@ -12,6 +12,8 @@ type Response struct {
 	Message string
 }
 
+// to run tests, first run the server using `npm run start`
+// from go-postgres directory
 func TestCreate(t *testing.T) {
 	resp, err := http.Get("http://localhost:3001/create")
 	if err != nil {
