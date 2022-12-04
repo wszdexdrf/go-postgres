@@ -1,0 +1,27 @@
+go-postgres/node_modules/
+go-postgres/frontend/node_modules
+
+
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+go-postgres/frontend/node_modules
+go-postgres/frontend/.pnp
+go-postgres/frontend/.pnp.js
+
+# testing
+go-postgres/frontend/coverage
+
+# production
+go-postgres/frontend/build
+
+# misc
+go-postgres/frontend/.DS_Store
+go-postgres/frontend/.env.local
+go-postgres/frontend/.env.development.local
+go-postgres/frontend/.env.test.local
+go-postgres/frontend/.env.production.local
+
+go-postgres/frontend/npm-debug.log*
+go-postgres/frontend/yarn-debug.log*
+go-postgres/frontend/yarn-error.log*
