@@ -7,23 +7,24 @@ import (
 	"strings"
 
 	"github.com/supertokens/supertokens-golang/recipe/session"
+	"github.com/supertokens/supertokens-golang/recipe/session/sessmodels"
 	"github.com/supertokens/supertokens-golang/supertokens"
 )
 
 func create(w http.ResponseWriter, r *http.Request) {
-	io.WriteString(w, "Create Success\n")
+	io.WriteString(w, "Create Success")
 }
 
 func read(w http.ResponseWriter, r *http.Request) {
-	io.WriteString(w, "Read Success\n")
+	io.WriteString(w, "Read Success")
 }
 
 func update(w http.ResponseWriter, r *http.Request) {
-	io.WriteString(w, "Update Success\n")
+	io.WriteString(w, "Update Success")
 }
 
 func delete(w http.ResponseWriter, r *http.Request) {
-	io.WriteString(w, "Delete Success\n")
+	io.WriteString(w, "Delete Success")
 }
 
 func main() {
@@ -35,25 +36,35 @@ func main() {
 
 	http.ListenAndServe(":3001", corsMiddleware(
 		supertokens.Middleware(http.HandlerFunc(func(rw http.ResponseWriter, r *http.Request) {
-
+			sessionRequired := false
 			if r.URL.Path == "/create" {
-				session.VerifySession(nil, create).ServeHTTP(rw, r)
+				session.VerifySession(&sessmodels.VerifySessionOptions{
+					SessionRequired: &sessionRequired,
+				}, create).ServeHTTP(rw, r)
 			}
 
 			if r.URL.Path == "/read" {
-				session.VerifySession(nil, read).ServeHTTP(rw, r)
+				session.VerifySession(&sessmodels.VerifySessionOptions{
+					SessionRequired: &sessionRequired,
+				}, read).ServeHTTP(rw, r)
 			}
 
 			if r.URL.Path == "/update" {
-				session.VerifySession(nil, update).ServeHTTP(rw, r)
+				session.VerifySession(&sessmodels.VerifySessionOptions{
+					SessionRequired: &sessionRequired,
+				}, update).ServeHTTP(rw, r)
 			}
 
 			if r.URL.Path == "/delete" {
-				session.VerifySession(nil, delete).ServeHTTP(rw, r)
+				session.VerifySession(&sessmodels.VerifySessionOptions{
+					SessionRequired: &sessionRequired,
+				}, delete).ServeHTTP(rw, r)
 			}
 
 			if r.URL.Path == "/sessioninfo" {
-				session.VerifySession(nil, sessioninfo).ServeHTTP(rw, r)
+				session.VerifySession(&sessmodels.VerifySessionOptions{
+					SessionRequired: &sessionRequired,
+				}, sessioninfo).ServeHTTP(rw, r)
 				return
 			}
 

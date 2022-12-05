@@ -1,16 +1,11 @@
 package main_test
 
 import (
-	"encoding/json"
 	"io"
 	"log"
 	"net/http"
 	"testing"
 )
-
-type Response struct {
-	Message string
-}
 
 // to run tests, first run the server using `npm run start`
 // from go-postgres directory
@@ -23,10 +18,8 @@ func TestCreate(t *testing.T) {
 	if err != nil {
 		log.Fatalln(err)
 	}
-	data := Response{}
-	json.Unmarshal([]byte(body), &data)
-	if data.Message != "Create Success" {
-		log.Fatalf("Message received: %s", data.Message)
+	if string(body) != "Create Success" {
+		log.Fatal(string(body))
 	}
 }
 
@@ -39,10 +32,8 @@ func TestRead(t *testing.T) {
 	if err != nil {
 		log.Fatalln(err)
 	}
-	data := Response{}
-	json.Unmarshal([]byte(body), &data)
-	if data.Message != "Read Success" {
-		log.Fatalf("Message received: %s", data.Message)
+	if string(body) != "Read Success" {
+		log.Fatal(string(body))
 	}
 }
 
@@ -55,10 +46,8 @@ func TestUpdate(t *testing.T) {
 	if err != nil {
 		log.Fatalln(err)
 	}
-	data := Response{}
-	json.Unmarshal([]byte(body), &data)
-	if data.Message != "Update Success" {
-		log.Fatalf("Message received: %s", data.Message)
+	if string(body) != "Update Success" {
+		log.Fatal(string(body))
 	}
 }
 
@@ -71,9 +60,7 @@ func TestDelete(t *testing.T) {
 	if err != nil {
 		log.Fatalln(err)
 	}
-	data := Response{}
-	json.Unmarshal([]byte(body), &data)
-	if data.Message != "Delete Success" {
-		log.Fatalf("Message received: %s", data.Message)
+	if string(body) != "Delete Success" {
+		log.Fatal(string(body))
 	}
 }
